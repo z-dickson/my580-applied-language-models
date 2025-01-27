@@ -264,6 +264,8 @@ unmasker("Hello I'm a [MASK] model.")
 
 
 
+# Tying it all together
+
 
 
 
@@ -274,7 +276,6 @@ unmasker("Hello I'm a [MASK] model.")
   - Can be used for creative writing, chatbots, and more
 
 
-# Applications in Social Science Research 
+# Limitations 
 
-- Interactive Surveys 
-  - 
+# Conclusion
