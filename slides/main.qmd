@@ -1,0 +1,280 @@
+---
+title: "Applied Large Language Models"
+subtitle: ''
+author: Zach Dickson
+institute: Fellow in Quantitative Methodology <br>London School of Economics
+bibliography: references.bib
+format:
+  revealjs: 
+    fontsize: 1.5em
+    logo: figures/LSE_logo.svg
+    embed-resources: true
+    slide-number: true
+    preview-links: auto
+    transition: convex
+    caption: true
+    tabularx: true
+    citation_package: biblatex
+    transition-speed: fast
+    theme: [simple, custom.scss]
+    footer: <a></a>
+---
+
+
+
+# Schedule {.scrollable .smaller}
+
+
+
+
+<figure>
+  <img align="right" src="figures/LLMS_wordcloud.jpg" alt="Trulli" style="width:45%">
+<br>
+
+
+- A Brief Introduction to Large Language Models (LLMs) (50 minutes)
+  + Word embeddings vs. LLMs
+  + Pre-trained models (BERT, GPT)
+  + Applications in the social sciences 
+
+**10 minute break**
+
+- Applied Example: Text Classification 
+  - Fine-tune a transformer model to predict issue topics  
+  - Validation and verification
+
+**1 hour lunch**
+
+- Applied Example: Topic Modeling & Text Clustering 
+  - Extract issue topics from social media messages
+
+
+**10 minute break** 
+
+- Everything else 
+  + State-of-the-art applications
+  + Validating our models 
+  + Limitations 
+  + Future applications 
+
+</figure>
+
+
+
+# My Background & Research Interests
+
+
+
+
+
+# What are Large Language Models (LLMs)? 
+
+- A language model is a machine learning model that intends to predict the next word in a sentence given the previous words. 
+  - Example: Autocomplete on your phone 
+
+- These models work by estimating the probability of a token (e.g. word), or a sequence of tokens, given the context of the sentence. 
+  - Example: "The cat is on the ___" 
+    + cup: 2.3%
+    + mat: 8.9%
+    + computer: 1.2%
+    + coffee: 0.9%
+  - The model predicts the next word is "mat" with the highest probability.
+  - A sequence of tokens could be a sentence, paragraph, or entire document.
+
+
+
+::: footer
+Introduction to Large Language Models
+:::
+
+
+# What are Large Language Models (LLMs)? 
+
+- Modeling human language is very complex 
+  - Syntax, semantics, pragmatics, etc. 
+  - Context, ambiguity, and nuance 
+  - Cultural and social norms
+
+- As models get larger, they can capture more of these complexities 
+  - More parameters, more data, more context 
+  - Better at predicting the next word in a sentence 
+  - Better at understanding the meaning of words and sentences
+
+
+
+# Transformers 
+
+
+- Transformers are a type of neural network architecture that has revolutionized natural language processing (NLP). 
+  - Introduced by [Vaswani et al. (2017)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=attention+is+all+you+need&btnG=&oq=attention+i)
+  - The model is based on the concept of "attention"
+
+- Transformers consist of an encoder and a decoder 
+  - The encoder processes the input sequence and produces a sequence of hidden states
+  - The decoder takes the hidden states produced by the encoder and generates the output sequence
+
+
+# Transformers Architecture
+
+
+
+<figure>
+  <img align="center" src="figures/transformers_arc.png" alt="Trulli" style="width:95%">
+</figure>
+
+
+# Attention Mechanism
+
+
+
+- Attention is a mechanism that allows the model to focus on different parts of the input sequence when making predictions. 
+  - The model can learn which parts of the input are most important for making predictions. 
+  - This allows the model to capture long-range dependencies in the data. 
+  - The model can also learn to focus on different parts of the input depending on the context of the sentence.
+
+
+
+# Attention Mechanism
+
+
+![Attention Mechanism](figures/attention.png)
+
+
+
+# How do LLMs generate text? 
+
+- LLMs generate text by sampling from the probability distribution over the vocabulary at each time step. 
+  - The model predicts the next word in the sequence by sampling from the distribution over the vocabulary. 
+  - The model can generate text one word at a time, or it can generate multiple words at once. 
+  - The model can also generate text conditioned on a specific input, such as a prompt or a context. 
+  - The model can generate text that is coherent and grammatically correct, but it can also generate text that is nonsensical or incoherent.
+
+- **Example:**
+  - "My dog, Max, knows how to perform many traditional dog tricks. _______"
+    - 2.3%: "For example, he can sit, stay, and roll over."
+    - 2.1%: "He can also fetch a ball, and he loves to play with his toys."
+
+
+
+# Pre-trained Models
+
+- Pre-trained models are large language models that have been trained on a large amount of text data 
+  - Trained on a large corpus of text data, such as Wikipedia, news articles, and books 
+  - Unsupervised learning, which means it does not require labeled data 
+  - Trained for a long time, often several days or weeks
+
+- Pre-trained models can be fine-tuned on a specific task or dataset
+  - Fine-tuning involves updating the parameters of the pre-trained model on a smaller dataset that is specific to the task
+  - Fine-tuning allows the model to learn the specific patterns and relationships in the data
+
+
+
+
+# Pre-trained Models
+
+- Pre-trained models example: [BERT](https://huggingface.co/google-bert/bert-base-uncased) (Bi-directional Encoder Representations from Transformers)
+  - Introduced by [Devlin et al. (2018)](https://arxiv.org/abs/1810.04805)
+  - Pre-trained on a large corpus of text data, such as Wikipedia and news articles
+  - Fine-tuned on specific tasks, such as question answering, text classification, and named entity recognition
+
+
+
+# BERT Example
+
+```{.python}
+from transformers import pipeline
+unmasker = pipeline('fill-mask', model='bert-base-uncased')
+unmasker("Hello I'm a [MASK] model.")
+
+[{'sequence': "[CLS] hello i'm a fashion model. [SEP]",
+  'score': 0.1073106899857521,
+  'token': 4827,
+  'token_str': 'fashion'},
+ {'sequence': "[CLS] hello i'm a role model. [SEP]",
+  'score': 0.08774490654468536,
+  'token': 2535,
+  'token_str': 'role'},
+ {'sequence': "[CLS] hello i'm a new model. [SEP]",
+  'score': 0.05338378623127937,
+  'token': 2047,
+  'token_str': 'new'},
+ {'sequence': "[CLS] hello i'm a super model. [SEP]",
+  'score': 0.04667217284440994,
+  'token': 3565,
+  'token_str': 'super'},
+ {'sequence': "[CLS] hello i'm a fine model. [SEP]",
+  'score': 0.027095865458250046,
+  'token': 2986,
+  'token_str': 'fine'}] 
+```
+
+# What else can we do with LLMs?
+
+- The real 'magic' of LLMs come in the way they convert text to numbers and back again. 
+  - This allows us to use them in a wide range of applications, such as:
+    - Text classification
+    - Text generation
+    - Named entity recognition
+    - Question answering
+    - Machine translation
+    - Sentiment analysis
+    - Summarization
+    - And many more!
+
+
+# A Framework for applications 
+
+- **Regression**
+  - Predicting a continuous variable (e.g. stock prices, house prices, ideology scores)
+  - Can we think of some examples in the social sciences?
+- **Classification**
+  - Predicting a categorical variable (e.g. sentiment, topic, party affiliation)
+  - Can we think of some examples in the social sciences?
+
+
+
+# Let's take a break 
+
+
+
+# Fine-tuning a Transformer Model for Text Classification
+
+- In this section, we will fine-tune a transformer model for text classification. 
+  - We will use the Hugging Face Transformers library to fine-tune a BERT transformer model on a dataset of BBC News articles. 
+  - We will train the model to predict the category of the news article based on the text of the article.
+  - We will evaluate the model on a test set and analyze the results.
+
+
+
+# Taking a step back 
+
+- Important to think about the **problem description**
+
+- Many problems in social science boil down to classification tasks. 
+  - For example: 
+    - We might want to know how much attention politicians pay to different issues in Parliament.
+    - We might want to understand the sentiment of social media posts about a particular policy.
+    - We might want to know whether a news article is biased towards a particular political party.
+
+- In this section, we will focus on classifying news articles into different categories based on their text, but the same principles apply to other classification tasks. 
+
+
+
+# Google Colab 
+
+
+
+
+
+
+# Advanced Applications and Future Directions 
+
+- **Text Generation**
+  - Generate text based on a prompt or context
+  - Can be used for creative writing, chatbots, and more
+
+
+# Applications in Social Science Research 
+
+- Interactive Surveys 
+  - 
