@@ -226,18 +226,18 @@ unmasker("Hello I'm a [MASK] model.")
 
 - **Regression**
   - Predicting a continuous variable (e.g. stock prices, house prices, ideology scores)
-  - Can we think of some examples in the social sciences?
 - **Classification**
   - Predicting a categorical variable (e.g. sentiment, topic, party affiliation)
-  - Can we think of some examples in the social sciences?
-
-
+- **Clustering**
+  - Grouping similar data points together (e.g. customer segmentation, topic modeling)
+- **Generation**
+  - Generating text based on a prompt or context (e.g. chatbots, creative writing)
 
 # Let's take a break 
 
 
 
-# Fine-tuning a Transformer Model for Text Classification
+# Applied Example: Text Classification
 
 - In this section, we will fine-tune a transformer model for text classification. 
   - We will use the Hugging Face Transformers library to fine-tune a BERT transformer model on a dataset of BBC News articles. 
@@ -246,36 +246,148 @@ unmasker("Hello I'm a [MASK] model.")
 
 
 
-# Taking a step back 
+# Google Colab Notebook 1 
 
-- Important to think about the **problem description**
+- Applied Example: Text Classification
 
-- Many problems in social science boil down to classification tasks. 
-  - For example: 
-    - We might want to know how much attention politicians pay to different issues in Parliament.
-    - We might want to understand the sentiment of social media posts about a particular policy.
-    - We might want to know whether a news article is biased towards a particular political party.
 
-- In this section, we will focus on classifying news articles into different categories based on their text, but the same principles apply to other classification tasks. 
+# Google Colab Notebook 2
+
+- Applied Example: Topic Modeling & Text Clustering
 
 
 
-# Google Colab 
+
 
 
 
 # Tying it all together
 
+- Language models are a powerful tool for analyzing and generating text data. 
+  - They can be used for a wide range of applications, from text classification to text generation. 
+  - They can be fine-tuned on specific tasks or datasets to improve performance. 
+  - They can be used to generate text that is coherent and grammatically correct. 
+  - They can be used to analyze and understand text data in new and innovative ways.
+
+
+# Validation is Crucial 
+
+- **Validation**
+  - Cross-validation
+  - Train-test split
+  - Hyperparameter tuning
+  - **Model evaluation metrics**
 
 
 
-# Advanced Applications and Future Directions 
+# Model Evaluation Metrics
 
-- **Text Generation**
-  - Generate text based on a prompt or context
-  - Can be used for creative writing, chatbots, and more
+- **Accuracy**
+  - The proportion of correct predictions out of the total number of predictions
+- **Precision**
+  - The proportion of true positive predictions out of the total number of positive predictions
+- **Recall**
+  - The proportion of true positive predictions out of the total number of actual positives
+
+- **F1 Score**
+  - The harmonic mean of precision and recall
+  - F1 = 2 * (precision * recall) / (precision + recall)
+
+# Confusion Matrix
+
+- A confusion matrix is a table that is often used to describe the performance of a classification model on a set of test data for which the true values are known.
+
+![Confusion Matrix](figures/confusion_matrix.png)
+
+
+
+
+# Advanced applications in the Social Sciences 
+
+
+
+# Identifying instrumental variables in observational studies 
+
+[Mining causality: Ai-assisted search for instrumental variables. Han (2024)](https://arxiv.org/abs/2409.14202)
+
+
+![Han (2024)](figures/Han.png)
+
+
+# Predicting Conflict Intensity 
+
+Introducing an Interpretable Deep Learning Approach to Domain-Specific Dictionary Creation: A Use Case for Conflict Prediction [Häffner et al. (2023)](https://doi.org/10.1017/pan.2023.7) 
+
+
+
+*We train the neural networks on a corpus of conflict reports and match them with conflict event data. This corpus consists of over 14,000 expert-written International Crisis Group (ICG) CrisisWatch reports between 2003 and 2021*
+
+
+![Predicting Conflict Intensity](figures/haffner_etal.png)
+
+
+
+
+
+# Microtargeting and Political Persuasion
+
+
+Evaluating the persuasive influence of political microtargeting with large language models [Hackenburg & Margetts (2024)](https://www.pnas.org/doi/abs/10.1073/pnas.2403116121)
+
+*[...] we integrate user data into GPT-4 prompts in real-time, facilitating the live creation of messages tailored to persuade individual users on political issues. We then deploy this application at scale to test whether personalized, microtargeted messaging offers a persuasive advantage compared to nontargeted messaging.*
+
+
+![Microtargeting and Political Persuasion](figures/hackenburg_margetts.jpg)
+
+
+
+# Synthetic Data Generation
+
+Synthetically generated text for supervised text analysis [Halterman (2025)](https://doi.org/10.1017/pan.2024.31)
+
+*This article proposes using LLMs to generate synthetic training data for training smaller, traditional supervised text models.*
+
+![Synthetic Data Generation](figures/halterman.png)
+
+
+# Scaling Political Texts 
+
+Positioning Political Texts with Large Language Models by Asking and Averaging [Le Mens & Gallego (2025)](https://doi.org/10.1017/pan.2024.29)
+
+*We ask an LLM where a tweet or a sentence of a political text stands on the focal dimension and take the average of the LLM responses to position political actors such as US Senators, or longer texts such as UK party manifestos or EU policy speeches given in 10 different languages.*
+
+
+![Scaling Political Texts](figures/lemens_gallego.png)
+
+
+# Limitations & Ethical Considerations
+
+<br>
+
+**Not a panacea**
 
 
 # Limitations 
 
-# Conclusion
+- Synthetic survey data generation: [Bisbee et al. (2023)](https://osf.io/preprints/socarxiv/5ecfa), [Sanders et al. (2023)](https://arxiv.org/abs/2307.04781) and [Simmons & Hare (2023)](https://arxiv.org/abs/2310.17888)
+  - A word of caution (see [Bisbee et al. (2023)](https://osf.io/preprints/socarxiv/5ecfa))
+
+![Bisbee et al. (2023)](figures/bisbee_etal.png)
+
+
+
+# Ethical Considerations in LLMs 
+
+- **Data Bias**
+  - Models can learn biases present in the training data
+  - Biases can be harmful and perpetuate stereotypes
+- **Data Privacy**
+  - Models can memorize sensitive information present in the training data
+  - Models can be used to deanonymize data
+- **Environmental Impact**
+  - Training large language models requires a lot of computational resources
+  - This can have a significant environmental impact
+
+
+# References
+
