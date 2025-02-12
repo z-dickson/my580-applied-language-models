@@ -101,6 +101,12 @@ Introduction to Large Language Models
   - Better at understanding the meaning of words and sentences
 
 
+# Transformers 
+
+<figure>
+  <img align="center" src="figures/attention_all_you_need.png" alt="Trulli" style="width:90%">
+</figure>
+
 
 # Transformers 
 
@@ -159,13 +165,14 @@ Introduction to Large Language Models
 # Pre-trained Models
 
 - Pre-trained models are large language models that have been trained on a large amount of text data 
-  - Trained on a large corpus of text data, such as Wikipedia, news articles, and books 
+  - Trained on a large corpus of [text data](https://huggingface.co/datasets), such as Wikipedia, news articles, and books 
   - Unsupervised learning, which means it does not require labeled data 
   - Trained for a long time, often several days or weeks
 
 - Pre-trained models can be fine-tuned on a specific task or dataset
-  - Fine-tuning involves updating the parameters of the pre-trained model on a smaller dataset that is specific to the task
+  - Fine-tuning involves updating the parameters of the pre-trained model on a [smaller dataset](https://huggingface.co/datasets/open-r1/OpenR1-Math-220k) that is specific to the task
   - Fine-tuning allows the model to learn the specific patterns and relationships in the data
+
 
 
 
@@ -360,19 +367,16 @@ Positioning Political Texts with Large Language Models by Asking and Averaging [
 ![Scaling Political Texts](figures/lemens_gallego.png)
 
 
+
+
+
+
+
 # Limitations & Ethical Considerations
 
 <br>
 
 **Not a panacea**
-
-
-# Limitations 
-
-- Synthetic survey data generation: [Bisbee et al. (2023)](https://osf.io/preprints/socarxiv/5ecfa), [Sanders et al. (2023)](https://arxiv.org/abs/2307.04781) and [Simmons & Hare (2023)](https://arxiv.org/abs/2310.17888)
-  - A word of caution (see [Bisbee et al. (2023)](https://osf.io/preprints/socarxiv/5ecfa))
-
-![Bisbee et al. (2023)](figures/bisbee_etal.png)
 
 
 
@@ -387,6 +391,53 @@ Positioning Political Texts with Large Language Models by Asking and Averaging [
 - **Environmental Impact**
   - Training large language models requires a lot of computational resources
   - This can have a significant environmental impact
+
+
+
+
+
+
+# Limitations 
+
+- Synthetic survey data generation: [Bisbee et al. (2023)](https://osf.io/preprints/socarxiv/5ecfa), [Sanders et al. (2023)](https://arxiv.org/abs/2307.04781) and [Simmons & Hare (2023)](https://arxiv.org/abs/2310.17888)
+  - A word of caution (see [Bisbee et al. (2023)](https://osf.io/preprints/socarxiv/5ecfa))
+
+![Bisbee et al. (2023)](figures/bisbee_etal.png)
+
+
+# Replication 
+
+- **Replication**
+  - Replicating the results of a study is crucial for ensuring the validity and reliability of the findings
+  - Replication involves re-running the analysis using the same data and methods as the original study
+
+
+# Replication & Reproducibility 
+
+![Barrie et al. (2023)](figures/spirling_et_al_replication.png)
+
+
+# Replication & Reproducibility
+
+- Take replication seriously - impose standards on ourselves and others
+- Opt for open-source models or versioning of proprietary models 
+- Think carefully about reducing variance
+
+
+
+# Some Future Applications
+
+- **Multimodal LLMs**
+  - Models that can process text, images, and other types of data
+  - [Deepseek Janus-Pro](https://huggingface.co/deepseek-ai/Janus-Pro-7B)
+- **Immage to 3D**
+  - Models that can generate 3D representations of images
+  - [Hunyuan3D](https://huggingface.co/tencent/Hunyuan3D-2)
+
+
+
+
+# What questions can I answer? 
 
 
 # References
