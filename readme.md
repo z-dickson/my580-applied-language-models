@@ -1,8 +1,47 @@
-## This repo contains the code and data for MY580's *Applied Language Models in the Social Sciences* course.
+# Applied Large Language Models in the Social Sciences
 
-The course is geared towards PhD students with existing Python programming experience. Students should have access to Python either locally through [Anaconda](https://www.anaconda.com/) or via [Google Colab](https://colab.google/)
+This repository contains materials for a **1-day applied workshop** on using **Large Language Models (LLMs)** in social science research. The workshop introduces participants to the fundamentals of LLMs, demonstrates hands-on applications, and discusses opportunities and challenges in applying these models responsibly.
 
-Slides can be downloaded from `slides/main.html` and can be opened in a web browser. 
+## Schedule & Topics
 
-The course was designed by [Zach Dickson](https://z-dickson.github.io/) in the Department of Methodology at the London School of Economics. 
+### 1. Introduction to Large Language Models (50 minutes)
+- From word embeddings to LLMs
+- Pre-trained models (BERT, GPT, etc.)
+- Applications in the social sciences
+
+### 2. Applied Example: Text Classification
+- Fine-tuning a transformer model to predict issue topics
+- Model validation and verification
+
+### 3. Applied Example: Topic Modeling & Text Clustering
+- Extracting issue topics from social media messages
+- Comparing clustering with traditional approaches
+
+### 4. State of the Field & Future Directions
+- Cutting-edge applications of LLMs
+- Methods for validation and robustness checks
+- Current limitations of LLMs in social science research
+- Potential future applications
+
+## Learning Goals
+By the end of the workshop, participants will be able to:
+- Understand how LLMs work and how they differ from earlier text models.
+- Fine-tune a transformer model for supervised tasks like classification.
+- Apply unsupervised approaches (topic modeling, clustering) to large text corpora.
+- Critically assess opportunities, limitations, and ethical implications of LLMs in research.
+
+## Contents
+- `main.html`: Slide deck for the workshop (Quarto presentation).
+- Example code and datasets (to be added as needed).
+- References and resources for further reading. 
+
+## Requirements
+The workshop uses Python with modern NLP libraries. Recommended setup:
+- Python ≥ 3.9
+- [Transformers (Hugging Face)](https://huggingface.co/transformers/)
+- [PyTorch](https://pytorch.org/)
+
+
+
+**Zach Dickson** – Fellow in Quantitative Methodology, London School of Economics
 
