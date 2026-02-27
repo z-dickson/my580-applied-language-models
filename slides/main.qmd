@@ -739,7 +739,6 @@ Positioning Political Texts with Large Language Models by Asking and Averaging [
 ![Bisbee et al. (2023)](figures/bisbee_etal.png)
 
 
-
 # Replication & Reproducibility
 
 - Take replication seriously — impose standards on ourselves and others
