@@ -1,0 +1,6 @@
+image_key,image_label,setting,crowd_size,visible_signage,primary_theme,emotional_tone,actors_visible,image_type,confidence,actors_str
+womens_march_2017,"Women's March on Washington, January 2017",street_march,large_crowd (200+ people),yes,gender_rights,hopeful_celebratory,protesters,march_procession,high,protesters
+extinction_rebellion_london_2019,"Extinction Rebellion, Oxford Circus, London, April 2019",outdoor_public_space,large_crowd (200+ people),yes,environment_climate,determined_resolute,protesters,static_rally,high,protesters
+fridays_for_future_berlin_2019,"Fridays for Future climate strike, Berlin, September 2019",street_march,medium_crowd (20-200 people),yes,environment_climate,determined_resolute,protesters,march_procession,high,protesters
+peoples_vote_march_london_2019,"People's Vote (Anti-Brexit) March, London, March 2019",outdoor_public_space,medium_crowd (20-200 people),yes,electoral_politics,determined_resolute,protesters,static_rally,high,protesters
+blm_brooklyn_2020,"George Floyd / Black Lives Matter protest, Grand Army Plaza, Brooklyn, June 2020",outdoor_public_space,medium_crowd,no,other,neutral_unclear,"protesters, bystanders",static_rally,medium,"protesters, bystanders"

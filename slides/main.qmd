@@ -101,10 +101,10 @@ Introduction to Large Language Models
   - Better at understanding the meaning of words and sentences
 
 
-# Transformers
+## Transformers
 
 <figure>
-  <img align="center" src="figures/attention_all_you_need.png" alt="Trulli" style="width:90%">
+  <img align="center" src="figures/attention_all_you_need.png" alt="Trulli" style="width:80%; center;">
 </figure>
 
 
@@ -323,7 +323,7 @@ Two ways to apply a pre-trained model to your research task:
 
 - A confusion matrix is a table that is often used to describe the performance of a classification model on a set of test data for which the true values are known.
 
-![Confusion Matrix](figures/confusion_matrix.png)
+![Confusion Matrix](figures/confusion_matrix_CAP.png)
 
 
 # Notebook 1 {.center}
@@ -501,17 +501,166 @@ Project 3: Analysing Political Images with GPT-4o Vision
 
 
 
+# My Research: LLMs in Practice {.center}
+
+---
+
+# Project: COVID-19 Policy Opposition in Congress
+
+**Question**: Does personally contracting COVID-19 change how legislators publicly oppose containment policies?
+
+- **Dataset**: All US congressional press releases & Twitter messages (2020–2021)
+- **LLM task**: Fine-tune a language model to classify texts as *supporting* or *opposing* COVID-19 containment policies
+  - Trained on 4,200 manually coded press releases across 20 issue categories
+  - Scaled to classify all congressional communications over two years
+- **Design**: Staggered difference-in-differences — legislators serve as their own controls before and after infection
+
+::: footer
+COVID-19 Policy Opposition in Congress
+:::
+
+
+
+## How much Opposition by Party Were Democrats and Republicans?
+
+
+![](figures/opposition_by_party.png){fig-align="center"}
+
+
+## What Happened When Legislators Got COVID-19?
+
+
+![](figures/treatment_effect_2W.png){fig-align="center"}
+
+
+
+
+Infection reduced expressed opposition to COVID-19 policies by ~30%, even in a highly polarised environment
+
+::: footer
+COVID-19 Policy Opposition in Congress
+:::
+
+
+## Model Validation
+
+![](figures/figureA1.png){fig-align="center"}
+
+Fine-tuned classifier achieves 95% accuracy on held-out test set.
+
+::: footer
+COVID-19 Policy Opposition in Congress
+:::
+
+
+
+---
+
+# Project: Gender Gap in Legislative Responsiveness
+
+**Question**: Do women legislators respond more dynamically to shifts in constituents' issue priorities?
+
+- **Dataset**: ~400 bi-weekly YouGov surveys (2018–2022, US & UK) + 3 million legislator tweets
+- **LLM task**: Fine-tune a language model to classify legislative tweets into policy issue domains
+  - Trained on CAP-coded political texts across multiple issue areas
+  - Applied to classify 3+ million tweets into issue categories matching the survey instrument
+- **Design**: Vector autoregressions linking public issue salience to legislative attention over time
+
+::: footer
+Gender Gap in Legislative Responsiveness
+:::
+
+
+## Classifying 3 Million Legislative Tweets
+
+![](figures/US_attn.png){fig-align="center"}
+
+
+## Public Opinion on the Same Issues
+
+![](figures/US_mip.png){fig-align="center"}
+
+
+
+# Women Legislators Are More Responsive
+
+:::: {.columns}
+::: {.column width="50%"}
+![US](figures/cumulative_effects_mip_all_attention_US_4.png)
+:::
+::: {.column width="50%"}
+![UK](figures/cumulative_effects_mip_all_attention_UK_4.png)
+:::
+::::
+
+Women representatives show significantly greater responsiveness to shifts in public issue salience (US & UK)
+
+::: footer
+Gender Gap in Legislative Responsiveness
+:::
+
+
+# Validation: Classifying 3 Million Legislative Tweets
+
+![](figures/confusion_matrix.png){fig-align="center"}
+
+LLM classifier validated against hand-coded sample; high performance across issue categories
+
+::: footer
+Gender Gap in Legislative Responsiveness
+:::
+
+
+
+---
+
+# Project: Climate Change as a Radical Right Wedge Issue
+
+**Question**: Are radical right parties in Europe increasingly mobilizing climate change as a wedge issue?
+
+- **Dataset**: Party press releases across 9 European countries (10+ years)
+- **LLM task**: Fine-tune a *multilingual* BERT to classify press releases by policy area and climate position
+  - Trained on 257,756 sentences from CAP-coded texts in multiple European languages
+  - Classified 100,000+ press releases into policy topics and climate stances
+- **Design**: Compare attention and positioning across party families over time
+
+::: footer
+Climate Change as a Radical Right Wedge Issue
+:::
+
+# A Multilingual Policy Classifier
+
+![](figures/confusion_matrix_rrw.png){fig-align="center"}
+
+Multilingual BERT fine-tuned on CAP-coded political texts; 90% accuracy on held-out press releases
+
+::: footer
+Climate Change as a Radical Right Wedge Issue
+:::
+
+# Radical Right Attention to Climate Change
+
+![](figures/attention_to_climate_all_families.png){fig-align="center"}
+
+Radical right parties show increasing attention to climate issues — but with distinctly adversarial positions
+
+::: footer
+Climate Change as a Radical Right Wedge Issue
+:::
+
+# Party Positions on Climate Change
+
+![](figures/climate_change_party_positions.png){fig-align="center"}
+
+LLM-classified press releases reveal radical right diverges sharply from mainstream parties on climate policy
+
+::: footer
+Climate Change as a Radical Right Wedge Issue
+:::
+
+---
+
 # Advanced Applications in the Social Sciences
-
-
-
-# Identifying Instrumental Variables
-
-[Mining causality: AI-assisted search for instrumental variables. Han (2024)](https://arxiv.org/abs/2409.14202)
-
-
-![Han (2024)](figures/Han.png)
-
 
 # Predicting Conflict Intensity
 
@@ -590,23 +739,12 @@ Positioning Political Texts with Large Language Models by Asking and Averaging [
 ![Bisbee et al. (2023)](figures/bisbee_etal.png)
 
 
-# Replication
-
-- **Replication**
-  - Replicating the results of a study is crucial for ensuring the validity and reliability of the findings
-  - Replication involves re-running the analysis using the same data and methods as the original study
-
-
-# Replication & Reproducibility
-
-![Barrie et al. (2023)](figures/spirling_et_al_replication.png)
-
 
 # Replication & Reproducibility
 
 - Take replication seriously — impose standards on ourselves and others
 - Opt for open-source models or pin versions of proprietary models
-- Think carefully about reducing variance (set `temperature=0`, log your prompts)
+- Think carefully about reducing variance (e.g. adjust temperature, log your prompts)
 - Always report: model name, model version, prompt text, date of analysis
 
 

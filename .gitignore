@@ -1,0 +1,10 @@
+# Model checkpoints and training outputs
+code/bert_bbc_output/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
