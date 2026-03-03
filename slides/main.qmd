@@ -64,128 +64,181 @@ format:
 
 # My Background & Research Interests
 
+- **Fellow in Quantitative Methodology** at the London School of Economics
+- Research focus: legislative politics, political communication, and public opinion
+- I use LLMs as **measurement tools** — scaling manual coding tasks across millions of documents and images:
+  - Classifying congressional communications on COVID-19 policy opposition
+  - Classifying 3 million legislative tweets into issue domains across the US and UK
+  - Classifying 100,000+ party press releases across 9 European languages
 
-
-
-# What are Large Language Models (LLMs)?
-
-- A language model is a machine learning model that intends to predict the next word in a sentence given the previous words.
-  - Example: Autocomplete on your phone
-
-- These models work by estimating the probability of a token (e.g. word), or a sequence of tokens, given the context of the sentence.
-  - Example: "The cat is on the ___"
-    + cup: 2.3%
-    + mat: 8.9%
-    + computer: 1.2%
-    + coffee: 0.9%
-  - The model predicts the next word is "mat" with the highest probability.
-  - A sequence of tokens could be a sentence, paragraph, or entire document.
-
-
+- Today's projects draw directly on this work — by the end you will be able to run this kind of analysis yourself
 
 ::: footer
 Introduction to Large Language Models
 :::
 
 
-# What are Large Language Models (LLMs)?
 
-- Modeling human language is very complex
-  - Syntax, semantics, pragmatics, etc.
-  - Context, ambiguity, and nuance
-  - Cultural and social norms
+# What is a Language Model?
 
-- As models get larger, they can capture more of these complexities
-  - More parameters, more data, more context
-  - Better at predicting the next word in a sentence
-  - Better at understanding the meaning of words and sentences
+- A language model estimates the **probability of the next token** given the tokens that came before it
+  - "The cat sat on the ___" → *mat* (8.9%), *table* (4.2%), *floor* (3.1%) ...
+  - "The Prime Minister announced ___" → *that* (12%), *plans* (5%) ...
+
+- A **token** is roughly a word-fragment — not quite a word
+  - "unhappiness" → `un` `happin` `ess`
+  - "ChatGPT" → `Chat` `G` `PT`
+  - Modern LLMs have vocabularies of 30,000–100,000 tokens
+
+- This simple objective — *predict the next token* — turns out to be extraordinarily powerful
+  - To predict text well, a model must learn grammar, facts, reasoning, context, and cultural nuance
+  - The task is a proxy for *understanding* language
+
+::: footer
+Introduction to Large Language Models
+:::
 
 
-## Transformers
+
+# A Brief History: From Words to Understanding {.smaller}
+
+| Era | Approach | Key idea | Limitation |
+|-----|----------|----------|------------|
+| 1950s–2000s | Rule-based & Bag-of-Words | Count word frequencies | Ignores word order and context |
+| 2013 | Word Embeddings (Word2Vec) | Words as dense vectors; "king" − "man" + "woman" ≈ "queen" | Static: one meaning per word |
+| 2014–2017 | Recurrent Networks (LSTM) | Process sequences step by step | Short memory, slow to train |
+| **2017** | **Transformers** | **Attend to entire context at once** | Computationally expensive |
+| 2018–2020 | BERT, GPT-2, GPT-3 | Pre-train on massive corpora; fine-tune | Scale and cost |
+| 2022–present | ChatGPT, Claude, Gemini | Instruction tuning, RLHF, multimodal | Hallucination, bias, opacity |
+
+<br>
+
+Every major LLM today is built on the **transformer architecture** introduced in 2017
+
+::: footer
+Introduction to Large Language Models
+:::
+
+
+
+# The Transformer Revolution (2017)
+
+:::: {.columns}
+::: {.column width="52%"}
+
+- Introduced by [Vaswani et al. (2017)](https://arxiv.org/abs/1706.03762) in **"Attention is All You Need"**
+
+- Key innovations over earlier approaches:
+  - Processes entire sequences **in parallel** — not step-by-step
+  - Captures **long-range dependencies** via attention
+  - Scales efficiently to billions of parameters
+
+- Two core components:
+  - **Encoder**: reads and represents the input
+  - **Decoder**: generates the output
+
+- BERT uses only the **encoder** — GPT uses only the **decoder**
+
+:::
+::: {.column width="48%"}
 
 <figure>
-  <img align="center" src="figures/attention_all_you_need.png" alt="Trulli" style="width:80%; center;">
+  <img src="figures/attention_all_you_need.png" alt="Attention is All You Need" style="width:100%">
 </figure>
 
+:::
+::::
 
-# Transformers
-
-
-- Transformers are a type of neural network architecture that has revolutionized natural language processing (NLP).
-  - Introduced by [Vaswani et al. (2017)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=attention+is+all+you+need&btnG=&oq=attention+i)
-  - The model is based on the concept of "attention"
-
-- Transformers consist of an encoder and a decoder
-  - The encoder processes the input sequence and produces a sequence of hidden states
-  - The decoder takes the hidden states produced by the encoder and generates the output sequence
+::: footer
+Introduction to Large Language Models
+:::
 
 
-# Transformers Architecture
 
-
+# Transformer Architecture
 
 <figure>
-  <img align="center" src="figures/transformers_arc.png" alt="Trulli" style="width:95%">
+  <img align="center" src="figures/transformers_arc.png" alt="Transformer Architecture" style="width:90%">
 </figure>
 
-
-# Attention Mechanism
-
-
-
-- Attention is a mechanism that allows the model to focus on different parts of the input sequence when making predictions.
-  - The model can learn which parts of the input are most important for making predictions.
-  - This allows the model to capture long-range dependencies in the data.
-  - The model can also learn to focus on different parts of the input depending on the context of the sentence.
+::: footer
+Introduction to Large Language Models
+:::
 
 
 
-# Attention Mechanism
+# The Attention Mechanism
 
+:::: {.columns}
+::: {.column width="48%"}
+
+- Attention allows each token to "look at" every other token when making predictions
+  - Captures **long-range dependencies** — e.g. pronoun resolution across a paragraph
+  - Multiple **attention heads** track different types of relationships simultaneously
+  - The model learns *which* parts of the input matter most
+
+- Example: in "The animal didn't cross the street because **it** was too tired" — attention learns that *it* refers to *animal*, not *street*
+
+- This is what made transformers dramatically better than recurrent networks
+
+:::
+::: {.column width="52%"}
 
 ![Attention Mechanism](figures/attention.png)
 
+:::
+::::
+
+::: footer
+Introduction to Large Language Models
+:::
 
 
-# How do LLMs generate text?
 
-- LLMs generate text by sampling from the probability distribution over the vocabulary at each time step.
-  - The model predicts the next word in the sequence by sampling from the distribution over the vocabulary.
-  - The model can generate text one word at a time, or it can generate multiple words at once.
-  - The model can also generate text conditioned on a specific input, such as a prompt or a context.
-  - The model can generate text that is coherent and grammatically correct, but it can also generate text that is nonsensical or incoherent.
+# How LLMs Generate Text
 
-- **Example:**
+- At each step, the model predicts a **probability distribution** over the entire vocabulary, then samples from it
+
+- **Example**
   - "My dog, Max, knows how to perform many traditional dog tricks. _______"
     - 2.3%: "For example, he can sit, stay, and roll over."
     - 2.1%: "He can also fetch a ball, and he loves to play with his toys."
 
+- **Temperature** controls how deterministic vs. creative the output is
+  - Low temperature → model picks the highest-probability tokens (predictable)
+  - High temperature → model samples more freely (creative but less reliable)
 
+- For **research tasks**, we typically want low or zero temperature to reduce variance across runs
 
-# Pre-trained Models
-
-- Pre-trained models are large language models that have been trained on a large amount of text data
-  - Trained on a large corpus of [text data](https://huggingface.co/datasets), such as Wikipedia, news articles, and books
-  - Unsupervised learning, which means it does not require labeled data
-  - Trained for a long time, often several days or weeks
-
-- Pre-trained models can be fine-tuned on a specific task or dataset
-  - Fine-tuning involves updating the parameters of the pre-trained model on a [smaller dataset](https://huggingface.co/datasets/open-r1/OpenR1-Math-220k) that is specific to the task
-  - Fine-tuning allows the model to learn the specific patterns and relationships in the data
+::: footer
+Introduction to Large Language Models
+:::
 
 
 
+# Pre-training: Learning from the Internet
 
-# Pre-trained Models
+- **Pre-training** is the first stage of building a large language model
+  - Trained on hundreds of billions of tokens: Wikipedia, books, code, news, web crawls
+  - *Unsupervised*: the only training signal is predicting the next token — no labels needed
+  - Runs for weeks on thousands of GPUs; costs tens of millions of dollars
+  - Open datasets: [The Pile](https://huggingface.co/datasets/EleutherAI/the_pile_deduplicated), [Common Crawl](https://commoncrawl.org/), [RedPajama](https://huggingface.co/datasets/togethercomputer/RedPajama-Data-1T)
 
-- Pre-trained models example: [BERT](https://huggingface.co/google-bert/bert-base-uncased) (Bi-directional Encoder Representations from Transformers)
-  - Introduced by [Devlin et al. (2018)](https://arxiv.org/abs/1810.04805)
-  - Pre-trained on a large corpus of text data, such as Wikipedia and news articles
-  - Fine-tuned on specific tasks, such as question answering, text classification, and named entity recognition
+- After pre-training, the model has encoded a rich representation of language
+  - Grammar, facts, reasoning, style, multiple languages, domain knowledge
+
+- **Fine-tuning** then adapts this general model to a specific task
+  - A much smaller, labelled dataset (hundreds to thousands of examples)
+  - Takes hours or days — not weeks
+  - Makes the model useful for classification, extraction, conversation, and more
+
+::: footer
+Introduction to Large Language Models
+:::
 
 
 
-# BERT Example
+# BERT: An Encoder Model in Action
 
 ```{.python}
 from transformers import pipeline
@@ -193,26 +246,77 @@ unmasker = pipeline('fill-mask', model='bert-base-uncased')
 unmasker("Hello I'm a [MASK] model.")
 
 [{'sequence': "[CLS] hello i'm a fashion model. [SEP]",
-  'score': 0.1073106899857521,
-  'token': 4827,
-  'token_str': 'fashion'},
+  'score': 0.1073, 'token_str': 'fashion'},
  {'sequence': "[CLS] hello i'm a role model. [SEP]",
-  'score': 0.08774490654468536,
-  'token': 2535,
-  'token_str': 'role'},
+  'score': 0.0877, 'token_str': 'role'},
  {'sequence': "[CLS] hello i'm a new model. [SEP]",
-  'score': 0.05338378623127937,
-  'token': 2047,
-  'token_str': 'new'},
+  'score': 0.0534, 'token_str': 'new'},
  {'sequence': "[CLS] hello i'm a super model. [SEP]",
-  'score': 0.04667217284440994,
-  'token': 3565,
-  'token_str': 'super'},
- {'sequence': "[CLS] hello i'm a fine model. [SEP]",
-  'score': 0.027095865458250046,
-  'token': 2986,
-  'token_str': 'fine'}]
+  'score': 0.0467, 'token_str': 'super'}]
 ```
+
+- BERT's training objective: **predict masked tokens from bidirectional context** (left *and* right)
+- Pre-trained on Wikipedia + BooksCorpus; fine-tuned by [Devlin et al. (2018)](https://arxiv.org/abs/1810.04805) on 11 NLP benchmarks — state-of-the-art across all of them
+- Today we fine-tune BERT for document classification — the same principle, a new task
+
+::: footer
+Introduction to Large Language Models
+:::
+
+
+
+# BERT vs. GPT: Two Paradigms {.smaller}
+
+:::: {.columns}
+::: {.column width="50%"}
+
+**BERT — Encoder model**
+
+- Reads the entire sequence **bidirectionally**
+- Pre-trained to fill in *masked* tokens
+- Produces rich **representations** of text
+
+→ Best for: classification, extraction, embeddings
+
+*"What does this text mean?"*
+
+<br>
+
+Examples: BERT, RoBERTa, DeBERTa, CamemBERT
+
+:::
+::: {.column width="50%"}
+
+**GPT — Decoder model**
+
+- Reads text **left-to-right** only
+- Pre-trained to predict the *next* token
+- Generates text **sequentially**
+
+→ Best for: generation, summarisation, conversation
+
+*"What comes next?"*
+
+<br>
+
+Examples: GPT-4o, LLaMA, Mistral, DeepSeek
+
+:::
+::::
+
+<br>
+
+| | BERT / RoBERTa | GPT / LLaMA / Claude |
+|--|--|--|
+| Today's use | **Project 1** (fine-tuning) | **Projects 2 & 3** (prompting) |
+| Training data needed | Yes (labelled) | No |
+| Model runs | Locally | Via API |
+
+::: footer
+Introduction to Large Language Models
+:::
+
+
 
 # The Landscape of Modern LLMs
 
@@ -224,7 +328,7 @@ unmasker("Hello I'm a [MASK] model.")
   - Generate text left-to-right, one token at a time
   - Best for: text generation, summarisation, question answering
 
-- **Frontier models** (e.g. GPT-4o, Claude, Gemini)
+- **Frontier models** (e.g. GPT-5, Claude Sonnet, Gemini)
   - Very large, instruction-tuned, often multimodal
   - Accessed via API rather than run locally
   - Best for: complex reasoning, structured tasks, images
@@ -233,17 +337,69 @@ unmasker("Hello I'm a [MASK] model.")
   - Open (HuggingFace, Ollama): reproducible, free, run locally
   - Closed (OpenAI, Anthropic): more capable, but cost per token and privacy implications
 
+::: footer
+Introduction to Large Language Models
+:::
 
-# A Framework for Applications
 
-- **Regression**
-  - Predicting a continuous variable (e.g. stock prices, house prices, ideology scores)
-- **Classification**
-  - Predicting a categorical variable (e.g. sentiment, topic, party affiliation)
-- **Clustering**
-  - Grouping similar data points together (e.g. customer segmentation, topic modelling)
-- **Generation & Extraction**
-  - Generating text or extracting structured information from unstructured text
+
+# LLMs in Social Science Research {.smaller}
+
+Three core research paradigms — all illustrated in today's workshop:
+
+:::: {.columns}
+::: {.column width="33%"}
+
+**Classification**
+
+Fine-tune an encoder model on labelled data to code large corpora consistently and at scale
+
+- News topic detection
+- Sentiment analysis
+- Policy area coding
+- Ideology scoring
+
+*→ Project 1*
+
+:::
+::: {.column width="33%"}
+
+**Extraction**
+
+Prompt a frontier model to pull structured fields from unstructured text — no labelled data needed
+
+- Named entity recognition
+- Event characteristics
+- Legislative intent
+- Manifest claim coding
+
+*→ Project 2*
+
+:::
+::: {.column width="33%"}
+
+**Visual Analysis**
+
+Send images to a multimodal model to apply a coding scheme systematically at scale
+
+- Protest photography
+- Campaign advertising
+- Parliamentary records
+- Social media imagery
+
+*→ Project 3*
+
+:::
+::::
+
+<br>
+
+Recent examples: [Ornstein et al. (2022)](https://doi.org/10.1017/pan.2021.28) · [Laurer et al. (2023)](https://doi.org/10.1017/pan.2023.18) · [Hackenburg & Margetts (2024)](https://www.pnas.org/doi/abs/10.1073/pnas.2403116121) · [Halterman (2025)](https://doi.org/10.1017/pan.2024.31)
+
+::: footer
+Introduction to Large Language Models
+:::
+
 
 
 # Fine-tuning vs. Prompting {.smaller}
@@ -259,6 +415,33 @@ Two ways to apply a pre-trained model to your research task:
 | Reproducibility | High | Medium (version APIs) |
 | Task complexity | Single, well-defined | Complex, multi-step |
 | Today's project | **Project 1** | **Projects 2 & 3** |
+
+::: footer
+Introduction to Large Language Models
+:::
+
+
+
+# Key Research Considerations
+
+- **Validity**: Does the LLM actually measure what you intend it to measure?
+  - Always validate against a human-coded gold standard; report agreement metrics (F1, Cohen's κ)
+
+- **Reliability**: Is output consistent across runs and model versions?
+  - Set temperature = 0; pin the model version; log every prompt exactly as sent
+
+- **Bias**: Models inherit biases from their training corpora
+  - Errors may be systematic across text type, language, topic, or demographic group — test explicitly
+
+- **Transparency & Reproducibility**: LLM-based measurement must be reportable
+  - Share prompt text, model name, version, date of analysis, and validation results
+
+- **Privacy**: Do not send confidential or personally identifiable data to commercial APIs
+
+::: footer
+Introduction to Large Language Models
+:::
+
 
 
 # Let's take a break
@@ -771,4 +954,5 @@ Positioning Political Texts with Large Language Models by Asking and Averaging [
 
 
 # References
+
 
