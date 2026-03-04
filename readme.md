@@ -84,7 +84,7 @@ The notebooks and datasets are hosted in this repository.
 
 1. Download the repository as a ZIP file (click **Code → Download ZIP** on the GitHub page) and unzip it, **or** clone it with:
    ```bash
-   git clone https://github.com/YOUR-REPO-URL.git
+   git clone https://github.com/z-dickson/my580-applied-language-models
    ```
 2. Upload the three notebook files and the `data/` folder to your Google Drive or directly to Colab when prompted during the workshop.
 
